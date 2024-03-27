@@ -1,114 +1,96 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define MAX_PILHA 5
+#define MAX_SIZE_STACK 5
 
 struct Stack {
-    int topo;
-    int pilha[MAX_PILHA];
+    int top;
+    int stack[MAX_SIZE_STACK];
 } typedef Stack;
 
-bool IsEmpty (Stack *pi){
-    if(pi->topo == -1)
-        return true;
+bool isEmpty (Stack *pstack){
+    return pstack->top == -1;
+}
+
+void push (Stack *pstack, int newElement){
+    if(pstack->top < MAX_SIZE_STACK - 1)
+        pstack->stack[++pstack->top] = newElement;
     else
-        return false;
-}
-
-bool Push (Stack *pi, int novoElemento){
-    if(pi->topo < MAX_PILHA - 1){
-        pi->topo++;
-        pi->pilha[pi->topo] = novoElemento;
-        return false;
-    } else {
         printf("ERROR: Stack Overflow!\n");
-        return true;
-    }
 }
 
-bool Pop (Stack *pi, int *p){
-    if(!IsEmpty(pi)){
-        int Aux = pi->topo;
-        pi->topo--;
-        *p = pi->pilha[Aux];
-        return true;
-    } else {
+int pop (Stack *pstack){
+    if(!isEmpty(pstack))
+        return pstack->stack[pstack->top--];
+    else {
         printf("ERROR: Stack Underflow!\n");
-        return false;
+        return -1;
     }
 }
 
-bool Top (Stack *pi, int *p){
-    if(!IsEmpty(pi)){
-    *p = pi->pilha[pi->topo];
-    return true;
-    } else {
-    printf("Não há nenhum elemento no topo da Pilha");
-    return false;
+int top (Stack *pstack){
+    if(!isEmpty(pstack))
+        return pstack->stack[pstack->top];
+    else {
+        printf("Não há nenhum elemento no top da Pilha");
+        return -1;
     }    
 }
 
-bool PrintPilha (Stack stack){
-    if(!IsEmpty(&stack)){
-        while(!IsEmpty(&stack)){
-            printf("%dº Elemento - %d\n", stack.topo + 1, stack.pilha[stack.topo]);
-            stack.topo--;
+void printPilha (Stack stack){
+    if(!isEmpty(&stack)){
+        while(!isEmpty(&stack)){
+            printf("%dº Elemento - %d\n", stack.top + 1, stack.stack[stack.top]);
+            stack.top--;
         }
-        return 1;
-    } else {
+    } else
         printf("A Pilha está vázia!\n");
-        return 0;
-    }
 }
 
-bool Dup (Stack *pi){
-    if(!IsEmpty(pi)){
-        Push(pi,pi->pilha[pi->topo]);
-        return true;
-    } else {
+void dup (Stack *pstack){
+    if(!isEmpty(pstack))
+        push(pstack,pstack->stack[pstack->top]);
+    else
         printf("A Pilha está vázia!\n");
-        return 0;
-    }
 }
 
-bool Count (Stack stack){
-    int value, count = 0;
-    if(!IsEmpty(&stack)){
-        while(!IsEmpty(&stack)){
-            Pop(&stack, &value);
+void count (Stack stack){
+    int count = 0;
+    if(!isEmpty(&stack)){
+        while(!isEmpty(&stack)){
+            pop(&stack);
             count++; 
         }
         printf("A pilha possui %d elementos!\n", count);
-        return true;
-    } else {
-        printf("A pilha está vázia!\n", count);
-        return false;
-    }
+    } else
+        printf("A pilha está vázia!\n");
 }
 
 
 int main() {
     
     Stack stack;
-    stack.topo = -1;
+    stack.top = -1;
     int value = 0;
-    if(IsEmpty(&stack)) 
+    
+    /*
+    if(isEmpty(&stack)) 
         printf("A pilha está vazia!\n");
     else 
         printf("A pilha possui elementos!\n");
-    Push(&stack,10);
-    Push(&stack,7);
-    Pop(&stack,&value);
-    printf("Valor guardado = %d\n", value);
-    Push(&stack,87);
-    Push(&stack,40);
-    Top(&stack,&value);
-    printf("Valor guardado = %d\n", value);
-    Push(&stack,12);
-    Dup(&stack);
-    Dup(&stack);
-    PrintPilha(stack);
-    Count(stack);
+    */
+        
+    // push(&stack,10);
+    // push(&stack,7);
+    // printf("Valor guardado = %d\n", pop(&stack));
+    // push(&stack,87);
+    // push(&stack,40);
+    // printf("top stack = %d\n", top(&stack));
+    // push(&stack,12);
+    // dup(&stack);
+    // dup(&stack);
+    // printPilha(stack);
+    // count(stack);
 
     return 0;
 }
