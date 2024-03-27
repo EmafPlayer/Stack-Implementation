@@ -2,6 +2,7 @@
 
 Bem-vindo ao Stack Implementation! É uma implementação, feita em C, de pilha. 
 
+
 ## Como funciona
 
 **Is Empty**: Verifica se a pilha está vazia.
@@ -17,6 +18,7 @@ Bem-vindo ao Stack Implementation! É uma implementação, feita em C, de pilha.
 **Count**: Conta quantos elemento têm na pilha.
 
 **Print Pilha**: Printa todos elementos da pilha.
+
 
 ## Autor
 
