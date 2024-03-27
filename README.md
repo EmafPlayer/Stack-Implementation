@@ -1,4 +1,4 @@
-# Gerenciador de Notas 
+# Stack Implementation
 
 Bem-vindo ao Stack Implementation! É uma implementação, feita em C, de pilha. 
 
